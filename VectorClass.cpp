@@ -3,12 +3,7 @@
 
 #include ".\VectorClass.h"
 
-#include <ostream>
-
-//========//
 ///Vector2//
-//========//
-
 //Default constructor. Origin
 vector2::vector2()
 {
@@ -30,13 +25,25 @@ vector2::vector2(const vector2& other)
 	y = other.y;
 	UpdateLength();
 }
-
+//Destructor
+vector2::~vector2()
+{
+}
 //Accessors
-float vector2::GetX() const { return x; }
-float vector2::GetY() const { return y; }
-float vector2::GetLength() const { return length; }
+float vector2::GetX() const
+{
+	return x;
+}
+float vector2::GetY() const
+{
+	return y;
+}
+float vector2::GetLength() const
+{
+	return length;
+}
 //Mutators
-void vector2::SetX(const float& newValue)
+void vector2::SetX(float newValue)
 {
 	if (x != newValue)
 	{
@@ -44,13 +51,29 @@ void vector2::SetX(const float& newValue)
 		UpdateLength();
 	}
 }
-void vector2::SetY(const float& newValue)
+void vector2::SetY(float newValue)
 {
 	if (y != newValue)
 	{
 		y = newValue;
 		UpdateLength();
 	}
+}
+void vector2::IncreaseX(float increaseAmount)
+{
+	x += increaseAmount;
+	UpdateLength();
+}
+void vector2::IncreaseY(float increaseAmount)
+{
+	y += increaseAmount;
+	UpdateLength();
+}
+void vector2::Set(const vector2& other)
+{
+	x = other.x;
+	y = other.y;
+	UpdateLength();
 }
 //Copy assignment
 vector2& vector2::operator= (const vector2& rhs)
@@ -98,7 +121,14 @@ void vector2::UpdateLength()
 {
 	//Calculate length
 	float sum = (x * x) + (y * y);
-	length = sum > 0.0f ? sqrt(sum) : 0.0f;
+	if (sum > 0.0f)
+	{
+		length = sqrt(sum);
+	}
+	else
+	{
+		length = 0.0f;
+	}
 }
 //Modify coordinates to make vector length 1
 void vector2::Normalise()
@@ -125,11 +155,8 @@ void vector2::Reset()
 
 
 
-//========//
-///Vector3//
-//========//
 
-//Default constructor. Origin
+///Vector3//
 vector3::vector3()
 {
 	x = 0.0f;
@@ -153,35 +180,64 @@ vector3::vector3(const vector3& other)
 	z = other.z;
 	UpdateLength();
 }
+//Destructor
+vector3::~vector3()
+{
+}
 //Accessors
-float vector3::GetX() const { return x; }
-float vector3::GetY() const { return y; }
-float vector3::GetZ() const { return z; }
-float vector3::GetLength() const { return length; }
+float vector3::GetX() const
+{
+	return x;
+}
+float vector3::GetY() const 
+{
+	return y;
+}
+float vector3::GetZ() const
+{
+	return z;
+}
+float vector3::GetLength() const
+{
+	return length;
+}
 //Mutators
-void vector3::SetX(const float& newValue)
+void vector3::SetX(float newValue)
 {
-	if (x != newValue)
-	{
-		x = newValue;
-		UpdateLength();
-	}
+	x = newValue;
+	UpdateLength();
 }
-void vector3::SetY(const float& newValue)
+void vector3::SetY(float newValue)
 {
-	if (y != newValue)
-	{
-		y = newValue;
-		UpdateLength();
-	}
+	y = newValue;
+	UpdateLength();
 }
-void vector3::SetZ(const float& newValue)
+void vector3::SetZ(float newValue)
 {
-	if (z != newValue)
-	{
-		z = newValue;
-		UpdateLength();
-	}
+	z = newValue;
+	UpdateLength();
+}
+void vector3::IncreaseX(float increaseAmount)
+{
+	x += increaseAmount;
+	UpdateLength();
+}
+void vector3::IncreaseY(float increaseAmount)
+{
+	y += increaseAmount;
+	UpdateLength();
+}
+void vector3::IncreaseZ(float increaseAmount)
+{
+	z += increaseAmount;
+	UpdateLength();
+}
+void vector3::Set(const vector3 &other)
+{
+	x = other.x;
+	y = other.y;
+	z = other.z;
+	UpdateLength();
 }
 //Copy assignment
 vector3& vector3::operator= (const vector3& rhs)
@@ -191,7 +247,7 @@ vector3& vector3::operator= (const vector3& rhs)
 		x = rhs.x;
 		y = rhs.y;
 		z = rhs.z;
-		UpdateLength();
+		length = rhs.length;
 	}
 	return *this;
 }
@@ -220,6 +276,7 @@ vector3& vector3::operator-= (const vector3& rhs)
 	UpdateLength();
 	return *this;
 }
+
 //To use with std::cout
 std::ostream& operator<< (std::ostream& o, const vector3& rhs)
 {
@@ -230,7 +287,14 @@ void vector3::UpdateLength()
 {
 	//Calculate length
 	float sum = (x * x) + (y * y) + (z * z);
-	length = sum > 0.0f ? sqrt(sum) : 0.0f;
+	if (sum > 0.0f)
+	{
+		length = sqrt(sum);
+	}
+	else		//Invalid vector?
+	{
+		length = 0.0f;
+	}
 }
 //Modify coordinates to make vector length 1
 void vector3::Normalise()

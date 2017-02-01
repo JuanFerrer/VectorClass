@@ -22,14 +22,20 @@ public:
 	vector2(float X, float Y);
 	vector2(const vector2&);
 
+	//Destructor
+	~vector2();
+
 	//Accessors
 	float GetX() const;
 	float GetY() const;
 	float GetLength() const;
 
 	//Mutators
-	void SetX(const float&);
-	void SetY(const float&);
+	void SetX(float);
+	void SetY(float);
+	void IncreaseX(float);
+	void IncreaseY(float);
+	void Set(const vector2&);
 	//Length can not be set, only by adjusting the coordinates
 
 	//Copy Assignment
@@ -63,6 +69,9 @@ public:
 	vector3(float, float, float);
 	vector3(const vector3&);
 
+	//Destructor
+	~vector3();
+
 	//Accessors
 	float GetX() const;
 	float GetY() const;
@@ -70,9 +79,13 @@ public:
 	float GetLength() const;
 
 	//Mutators
-	void SetX(const float&);
-	void SetY(const float&);
-	void SetZ(const float&);
+	void SetX(float);
+	void SetY(float);
+	void SetZ(float);
+	void IncreaseX(float);
+	void IncreaseY(float);
+	void IncreaseZ(float);
+	void Set(const vector3&);
 	//Length can not be set, only by adjusting the coordinates
 
 	//Copy Assignment
